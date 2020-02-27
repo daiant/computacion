@@ -27,11 +27,13 @@ papeles(2).
 			<- .print("papel tirado a la papelera en ", X).
 
 +!localizado(robot, X) : localizado(robot, X) & papeles(0) <- .print("Ha llegado a su destino").
-+!localizado(robot, X) : localizado(robot, X) & papeles(P) & (not (P=0)) & adyacente(X,Z)
-<- .print("mover de ", X, " a ", Z);
-	 -localizado(robot, Y);
-	 +localizado(robot, Z);
-	 !localizado(robot, X).
+
++!localizado(robot, X) : localizado(robot, X) & papeles(P)
+					& (not (P=0)) & adyacente(X,Z)
+			<- .print("mover de ", X, " a ", Z);
+					-localizado(robot, Y);
+					+localizado(robot, Z);
+					!localizado(robot, X).
 
 +!localizado(robot, X) : localizado(robot, Y) &
 				(not (X=Y)) & adyacente(Y,Z)

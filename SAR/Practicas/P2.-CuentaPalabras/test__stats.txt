@@ -1,0 +1,9 @@
+Lines: 1
+Number words: 5
+Vocabulary size: 3
+Number of symbols: 27
+Number of different symbols: 12
+Words (alphabetical order): 
+	computacion: 1
+	hola: 3
+	pene: 1
