@@ -1,8 +1,8 @@
 #! -*- encoding: utf8 -*-
 
 
-
 ## Nombres:
+
 
 ########################################################################
 ########################################################################
@@ -32,7 +32,10 @@ class WordCounter:
     def diff(self, data, stops):
         s = set(stops)
         return [x for x in data if x not in s] ## Devuelve todas las x que están en data pero no en stops
-
+    """
+    for word in words:
+        cnt[word] = cnt.get(word, 0) + 1
+    """
     def create_dict(self, stat):
         return dict((x, stat.count(x)) for x in set(stat)) ## devuelve las veces que ha salido x palabra en lista stat
 
@@ -45,7 +48,8 @@ class WordCounter:
             res += "\t" + key + ": " + str(dict[key]) +"\n"
             i+=1
         return res ## devuelve un to string del diccionario
-    def calculate_args(self,lower, stopwords, bigram, full):
+
+    def calculate_args(self, lower, stopwords, bigram, full):
         res = ""
         if(lower):
             res+="l"
@@ -87,18 +91,20 @@ class WordCounter:
             fh.write("Number of different symbols: ")
             fh.write(str(len(set(stats["symbol"]))) + "\n") # set devuelve unicas
 
-            dictionary = self.create_dict(stats["word"])
             fh.write("Words (alphabetical order): \n")
-            fh.write(self.write_dict(full, dictionary, None, False))
+            fh.write(self.write_dict(full, stats["word"], None, False))
             fh.write("Words (by frequency): \n")
-            fh.write(self.write_dict(full, dictionary, dictionary.get, True))
+            fh.write(self.write_dict(full, stats["word"], stats["word"].get, True))
 
-            dict_symbol = self.create_dict(stats["symbol"])
+            #dict_symbol = self.create_dict(stats["symbol"])
             fh.write("Symbols (alphabetical order): \n")
-            fh.write(self.write_dict(full, dict_symbol, None, False))
+            fh.write(self.write_dict(full, stats["symbol"], None, False))
             fh.write("Symbols (by frequency): \n")
-            fh.write(self.write_dict(full, dict_symbol, dict_symbol.get, True))
-            fh.close()
+            fh.write(self.write_dict(full, stats["symbol"], stats["symbol"].get, True))
+            if(stats.get("biword") is not None):
+                print("hay bigramas")
+            else:
+                print("no hay")
             pass
 
     def file_stats(self, filename, lower, stopwordsfile, bigrams, full):
@@ -139,22 +145,38 @@ class WordCounter:
         sts["nwords"] = len(data.split())
         fh.seek(0) # devolver el puntero a 0
         sts["nlines"] = sum(1 for line in fh)
+        if bigrams:
+            fh.seek(0)
+            data_bi = []
+            for line in fh:
+                data_bi.append(line)
+            for line in range(len(data_bi)):
+                data_line = ' '.join(map(str, self.clean.findall(data_bi[line])))
+                data_bi[line] = "$ " + data_line + " $"
+## ahora lo queremos a dictionario 1. a string 2. medir pares
+            data_bi_w = " ".join(map(str, data_bi))
+            data_bi_s = "".join(map(str,data_bi))
+            print(data_bi_w)
+
         fh.close()
+        if(lower):
+            data = data.lower()
 
         data_clean = self.clean.findall(data) # eliminar no alfanuméricos
         data = self.diff(data_clean, stopwords) # eliminar stopwords
         sts['nswords'] = len(data)
 
-        data_words = ' '.join(map(str, data)) ## creando un string para modificar (más rapido?) lo de las minúsculas
-        data_sym = ''.join(map(str, data))
 
-        if(lower):
-            data_words = data_words.lower()
-            data_sym = data_sym.lower()
+        data_words = ' '.join(map(str, data)) # creando string para poder separar por palabras
+        data_symbol = "".join(map(str, data))
 
-        sts["word"] = list(data_words.split()) # devuelve una lista de palabros
-        sts["symbol"] = list(data_sym)
-        new_filename = filename.split(".")[0] + "_" + self.calculate_args(lower,True if len(stopwords)>0 else False, bigrams, full) + "_stats.txt" # cambiar
+        sts["word"] = self.create_dict(data_words.split())
+        sts["symbol"] = self.create_dict(data_symbol)
+
+
+
+        argumentos = self.calculate_args(lower, True if len(stopwords)>0 else False, bigrams, full)
+        new_filename = filename.split(".")[0] + "_" + argumentos + "_stats." + filename.split(".")[1]
         self.write_stats(new_filename, sts, stopwordsfile is not None, full)
 
 
