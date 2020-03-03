@@ -1,0 +1,36 @@
+1. Unidades de cada producto y cual es el coste total??
+	A = 36 
+	B1 = 5
+	B2 = 40
+	C1 = 10
+	C2 = 0
+	Coste total = 55464 leuros
+
+2. Maquinas con capacidad no utilizada.
+	M2: 240 minutos	
+	M3: 54 minutos
+	M4: 12 minutos
+
+3. 30 minutos más en M1?
+	Disminuye el valor de la función a razón de 1.25 unidades por minuto,
+	además entra dentro del rango que se puede incrementar(<43) por lo 
+	que la función objetivo no cambia.
+
+4. 5 unidades menos de B 
+	El rango que se puede decrementar del producto B es 40, por lo que 
+	restar 5 unidades entra en el rango. Por tanto solo cambia el valor
+	de la F.O., esto es, disminuirá su coste a razón de 570 unidades por 
+	producto decrementado
+
+5. 10 -> 12 en demanda de C
+	El incremento es mayor al rango permitido (1.33), por lo que sabemos
+	que al incrementar una unidad el valor de la F.O. empeorará 
+	a razón de 714 unidades. Sin embargo, para un incremento de 2 se 
+	deberá volver a modelar la F.O.
+
+6. Nuevo Producto D
+	Es que yo creo que sin modificar valore no tengo ni idea por 
+	la máquina A. no sé no sé
+	Calla. Al reducir 10 minutos a la maquina uno será peor en 10*1.25
+	el valor de la f.o. Pero como tenemos 125 euros netos -> nos 
+	sale rentable el nuevo producto.

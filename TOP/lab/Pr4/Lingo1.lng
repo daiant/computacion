@@ -1,0 +1,10 @@
+[demanda_A] Xa > 36;
+[demanda_B] Xb1 + Xb2 >  45;
+[demanda_C] Xc1 + Xc2 > 10;
+
+[capacidad_M1] 10*Xa + 8*Xb1 + 8*Xc1 < 480;
+[capacidad_M2] 6*Xb2 + 10*Xc2 < 480;
+[capacidad_M3] 6*Xa + 10*Xb1 + 16*Xc1 + 3*Xc2 < 480;
+[capacidad_M4] 3*Xa + 9*Xb2 + 8*Xc2 < 480;
+
+min=634*Xa+560*Xb1+570*Xb2+704*Xc1+812*Xc2;
