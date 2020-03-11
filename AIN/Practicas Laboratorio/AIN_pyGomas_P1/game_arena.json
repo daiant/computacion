@@ -1,0 +1,32 @@
+{
+    "host": "gtirouter.dsic.upv.es",
+    "manager": "manager_carsengi",
+    "manager_password": "secret",
+    "service": "service_carsengi",
+    "service_password": "secret",
+    "axis": [
+		{
+            "rank": "BDISoldier",
+            "name": "luchador_carsengi",
+            "password": "secret",
+            "amount": 21,
+            "asl": "luchador.asl"
+        }
+    ],
+     "allied": [
+                {
+            "rank": "invencibleM.BDIMInvencible",
+            "name": "medic_carsengi",
+            "password": "secret",
+            "amount": 1,
+            "asl": "medic_arena.asl"
+        }, 
+        {
+            "rank": "invencibleF.BDIFInvencible",
+            "name": "fieldop_carsengi",
+            "password": "secret",
+            "amount": 3,
+            "asl": "fieldop_arena.asl"
+        }
+   ]
+  }

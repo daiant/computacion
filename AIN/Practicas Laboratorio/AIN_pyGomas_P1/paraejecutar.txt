@@ -1,0 +1,6 @@
+// Manager
+pygomas manager -j carsengi_manager@gtirouter.dsic.upv.es -sj carsengi_service@gtirouter.dsic.upv.es -np 6
+// Tropas
+pygomas run -g troops.json
+// Render
+pygomas render
